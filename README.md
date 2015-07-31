@@ -9,6 +9,15 @@ pyenvの設定は[コチラ](http://qiita.com/la_luna_azul/items/3f64016feaad172
 
 ## 使い方
 
+### モジュールインストール
+
+pip で必要なモジュールをインストールします
+
+```bash
+$ pyenv activate your-virtualenv
+$ pip install -r requirement.txt
+```
+
 ### config.jsonの準備
 config.jsonを同一ディレクトリに準備して下さい。
 中身は以下のようにして下さい。
