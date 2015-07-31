@@ -9,13 +9,16 @@ app = Flask(__name__)
 f = open('config.json', 'r')
 data = json.load(f)
 
+
 class EntryForm(Form):
     email = TextField('email', [InputRequired(), Email()])
+
 
 @app.route('/slack-invite')
 def index():
     form = EntryForm()
     return render_template('index.html', form=form, data=data, flag=False)
+
 
 @app.route('/post', methods=['POST'])
 def post():
@@ -27,16 +30,20 @@ def post():
             return render_template('result.html', form=form)
         else:
             data['err_msg'] = 'Error: {}'.format(r['error'])
-            return render_template('index.html', form=form, data=data, flag=True)
+            return render_template(
+                'index.html', form=form, data=data, flag=True
+            )
     else:
         data['err_msg'] = 'Bad format: Please input E-mail address !!'
         return render_template('index.html', form=form, data=data, flag=True)
+
 
 def send_slack_invitation(email):
     url = 'https://{}/api/users.admin.invite'.format(data['domain'])
     token = data['token']
     params = {'email': email, 'token': token, 'set_active': 'true'}
     return requests.post(url, params=params).json()
+
 
 if __name__ == '__main__':
     app.debug = True
