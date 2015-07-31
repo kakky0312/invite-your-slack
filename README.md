@@ -45,3 +45,9 @@ $ ./control_process.sh start
 $ pyenv activate your-virtualenv
 $ ./control_process.sh stop
 ```
+
+### 動作確認
+
+* デフォルトでは5000番ポートで動作します
+    http://your.domain:5000/slack-invite
+* 起動ポートを変更したい場合は control_process.sh の PORT という変数を変更して下さい
